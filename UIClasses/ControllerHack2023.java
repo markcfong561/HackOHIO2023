@@ -11,14 +11,14 @@ public final class ControllerHack2023 {
     public ControllerHack2023(ModelHack2023 model, ViewHack2023 view) {
         this.model = model;
         this.view = view;
-        updateViewToMatchModel(model, view);
+        updateViewToMatchModel(this.model, this.view);
     }
 
     //Updates
     private void updateViewToMatchModel(ModelHack2023 model, ViewHack2023 view) {
         view.updateVideo();
-        for (Map.Entry<Pair<Integer, Integer>, Double> person : model.people.entrySet()) {
-            view.updateUI(person.getKey().getKey(), person.getKey().getValue(), model.people.get(person));
+        for (Map.Entry<Pair<Integer, Integer>, Double> person : this.model.people.entrySet()) {
+            view.updateUI(person.getKey().getKey(), person.getKey().getValue(), this.model.people.get(person));
         }
 
     }
@@ -30,7 +30,7 @@ public final class ControllerHack2023 {
             model.people.put(coordinate, distances[i]);
         }
 
-        updateViewToMatchModel(model, view);
+        updateViewToMatchModel(this.model, this.view);
     }
 
 }

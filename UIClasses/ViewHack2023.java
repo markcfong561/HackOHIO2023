@@ -49,7 +49,7 @@ public final class ViewHack2023 extends JFrame {
         this.add(layeredVideoPanel);
         this.add(layeredPane);
         this.setSize(1200, 500);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         // label1 = new JLabel(this.controller.distance());
 
