@@ -1,12 +1,15 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
 public final class ViewHack2023 extends JFrame {
 
     private ControllerHack2023 controller;
 
-    private Overlay overlay;
+    // private Overlay overlay;
 
     private enum State {
         PERSON_SEEN, PERSON_LOST
@@ -15,15 +18,24 @@ public final class ViewHack2023 extends JFrame {
     // default constructor
     private State currentState;
 
-    public ViewHack2023() {
-        //call JFrame
-        super("rectangles");
+    private JLayeredPane layeredPane;
 
-        //set up initial state of GUI as if it has seen nobody
+    public ViewHack2023() {
+        // call JFrame
+        super("people cam");
+
+        // set up initial state of GUI as if it has seen nobody
         this.currentState = State.PERSON_LOST;
 
-        JFrame frame = new JFrame
+        // JLabel rectangle = new JLabel();
 
+        layeredPane = new JLayeredPane();
+        layeredPane.setBounds(0, 0, 1200, 500);
+
+        this.add(layeredPane);
+        this.setSize(1200, 500);
+        this.setLayout(null);
+        // label1 = new JLabel(this.controller.distance());
 
         /*
          * Make sure the main window is appropriately sized, exits this program
@@ -40,6 +52,24 @@ public final class ViewHack2023 extends JFrame {
 
         this.controller = controller;
 
+    }
+
+    public void updateVideo() {
+
+    }
+
+    public void updateUI(int x, int y, double distance) {
+        JLabel label1 = new JLabel(distance + " m");
+        label1.setHorizontalTextPosition(x);
+        label1.setVerticalTextPosition(y);
+        this.layeredPane.add(label1);
+    }
+
+    public void frameUpdated(ActionEvent event) {
+        Object source = event.getSource();
+        this.controller.draw();
+
+        if ( )
     }
 
 }
