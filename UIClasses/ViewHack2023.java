@@ -56,10 +56,12 @@ public final class ViewHack2023 extends JFrame {
 
     }
 
+    // this will "update" the current image from controller
     public void updateVideo() {
-
+        this.controller.processNewImage();
     }
 
+    // places label where it goes over image
     public void updateUI(int x, int y, double distance) {
         JLabel label1 = new JLabel(distance + " m");
         label1.setHorizontalTextPosition(x);
