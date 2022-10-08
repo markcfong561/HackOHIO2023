@@ -71,7 +71,7 @@ public final class ViewHack2023 extends JFrame {
 
     public void frameUpdated(ActionEvent event) {
         Object source = event.getSource();
-        this.controller.draw();
+        
 
         if ( )
     }

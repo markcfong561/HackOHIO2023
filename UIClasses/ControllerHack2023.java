@@ -22,6 +22,8 @@ public final class ControllerHack2023 {
             Pair<Integer, Integer> coordinate = new Pair<Integer, Integer>(x[i], y[i]);
             model.people.put(coordinate, distances[i]);
         }
+
+        updateViewToMatchModel(model, view);
     }
 
 }
