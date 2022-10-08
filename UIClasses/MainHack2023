@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Main {
+public class MainHack2023 {
     public static void main(String[] args) {
         Random rand = new Random();
 
