@@ -1,6 +1,11 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -22,6 +27,10 @@ public final class ViewHack2023 extends JFrame {
 
     private JLayeredPane layeredPane;
 
+    private JLayeredPane layeredVideoPanel;
+
+    private JLabel imageLabel;
+
     public ViewHack2023() {
         // call JFrame
         super("people cam");
@@ -30,13 +39,17 @@ public final class ViewHack2023 extends JFrame {
         this.currentState = State.PERSON_LOST;
 
         // JLabel rectangle = new JLabel();
+        layeredVideoPanel.setBounds(0, 0, 1200, 500);
+        // imageLabel.setBounds(0,0,1200,500);
 
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, 1200, 500);
 
+        this.add(layeredVideoPanel);
         this.add(layeredPane);
         this.setSize(1200, 500);
         this.setLayout(null);
+
         // label1 = new JLabel(this.controller.distance());
 
         /*
@@ -58,7 +71,12 @@ public final class ViewHack2023 extends JFrame {
 
     // this will "update" the current image from controller
     public void updateVideo() {
+        BufferedImage img = ImageIO.read(new File(this.controller.imageLoc));
+        ImageIcon icon = new ImageIcon(img);
+        this.imageLabel.setIcon(icon);
+        this.layeredVideoPanel.add(this.imageLabel);
         this.controller.processNewImage();
+
     }
 
     // places label where it goes over image
