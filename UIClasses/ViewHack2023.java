@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
+import co.sun.jna.
+
 public final class ViewHack2023 extends JFrame {
 
     private ControllerHack2023 controller;
