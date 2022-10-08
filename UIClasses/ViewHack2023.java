@@ -71,7 +71,7 @@ public final class ViewHack2023 extends JFrame {
 
     // this will "update" the current image from controller
     public void updateVideo() {
-        BufferedImage img = ImageIO.read(new File(this.controller.imageLoc));
+        BufferedImage img = ImageIO.read(new File("UIClasses/image.jpg"));
         ImageIcon icon = new ImageIcon(img);
         this.imageLabel.setIcon(icon);
         this.layeredVideoPanel.add(this.imageLabel);
@@ -85,13 +85,6 @@ public final class ViewHack2023 extends JFrame {
         label1.setHorizontalTextPosition(x);
         label1.setVerticalTextPosition(y);
         this.layeredPane.add(label1);
-    }
-
-    public void frameUpdated(ActionEvent event) {
-        Object source = event.getSource();
-        
-
-        if ( )
     }
 
 }
