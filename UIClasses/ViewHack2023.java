@@ -39,6 +39,7 @@ public final class ViewHack2023 extends JFrame {
         this.currentState = State.PERSON_LOST;
 
         // JLabel rectangle = new JLabel();
+        layeredVideoPanel = new JLayeredPane(); 
         layeredVideoPanel.setBounds(0, 0, 1200, 500);
         // imageLabel.setBounds(0,0,1200,500);
 
@@ -48,7 +49,7 @@ public final class ViewHack2023 extends JFrame {
         this.add(layeredVideoPanel);
         this.add(layeredPane);
         this.setSize(1200, 500);
-        this.setLayout(null);
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         // label1 = new JLabel(this.controller.distance());
 

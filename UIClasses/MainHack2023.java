@@ -24,7 +24,7 @@ public class MainHack2023 {
 
         ModelHack2023 model = new ModelHack2023();
         ViewHack2023 view = new ViewHack2023();
-        ControllerHack2023 controller = new ControllerHack2023();
+        ControllerHack2023 controller = new ControllerHack2023(model, view);
 
         view.registerObserver(controller);
     }
