@@ -12,15 +12,20 @@ import javax.swing.JLabel;
 
 public final class ViewHack2023 extends JFrame {
 
+    // Controller component
     private ControllerHack2023 controller;
 
+    // Image objects to display camera frames
     private BufferedImage img;
     private BufferedImage previousImg;
 
+    // Icon allows image fiies to be displayed
     private ImageIcon icon;
 
+    // Frame stores and displays components
     private JFrame frame;
 
+    // Labesl store displayable icons
     private JLabel imageLabel;
 
     public ViewHack2023() throws IOException {
