@@ -1,66 +1,53 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-
-import co.sun.jna.
 
 public final class ViewHack2023 extends JFrame {
 
     private ControllerHack2023 controller;
 
-    // private Overlay overlay;
+    private BufferedImage img;
+    private BufferedImage previousImg;
 
-    private enum State {
-        PERSON_SEEN, PERSON_LOST
-    }
+    private ImageIcon icon;
 
-    // default constructor
-    private State currentState;
-
-    private JLayeredPane layeredPane;
-
-    private JLayeredPane layeredVideoPanel;
+    private JFrame frame;
 
     private JLabel imageLabel;
 
-    public ViewHack2023() {
+    public ViewHack2023() throws IOException {
         // call JFrame
         super("people cam");
 
-        // set up initial state of GUI as if it has seen nobody
-        this.currentState = State.PERSON_LOST;
+        img = ImageIO.read(new File("UIClasses/image.jpg"));
+        previousImg = ImageIO.read(new File("UIClasses/yuh.jpg"));
 
-        // JLabel rectangle = new JLabel();
-        layeredVideoPanel = new JLayeredPane(); 
-        layeredVideoPanel.setBounds(0, 0, 1200, 500);
-        // imageLabel.setBounds(0,0,1200,500);
+        icon = new ImageIcon(img);
 
-        layeredPane = new JLayeredPane();
-        layeredPane.setBounds(0, 0, 1200, 500);
+        frame = new JFrame();
+        frame.setLayout(new FlowLayout());
+        frame.setSize(640, 480);
 
-        this.add(layeredVideoPanel);
-        this.add(layeredPane);
-        this.setSize(1200, 500);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        imageLabel = new JLabel();
+        imageLabel.setIcon(icon);
 
-        // label1 = new JLabel(this.controller.distance());
+        // this.add(layeredVideoPanel);
+        frame.add(imageLabel);
 
         /*
          * Make sure the main window is appropriately sized, exits this program
          * on close, and becomes visible to the user
          */
-
-        this.pack();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     // lets the controller change
@@ -71,21 +58,35 @@ public final class ViewHack2023 extends JFrame {
     }
 
     // this will "update" the current image from controller
-    public void updateVideo() {
-        BufferedImage img = ImageIO.read(new File("UIClasses/image.jpg"));
-        ImageIcon icon = new ImageIcon(img);
-        this.imageLabel.setIcon(icon);
-        this.layeredVideoPanel.add(this.imageLabel);
-        this.controller.processNewImage();
+    public void updateVideo(List<Integer> x, List<Integer> y, List<Double> d) throws IOException, InterruptedException {
+        File f = new File("UIClasses/image.jpg");
+        while (this.img == null) {
+            this.img = ImageIO.read(f);
+            if (this.img == null) {
+                this.img = this.previousImg;
+            } else {
+                this.previousImg = this.img;
+            }
 
+        }
+        this.icon = new ImageIcon(img);
+        this.imageLabel.setIcon(icon);
+        this.frame.add(this.imageLabel);
+        this.controller.processNewImage(this.controller.xCoordinate(), this.controller.yCoordinate(),
+                this.controller.distancesArray());
+    }
+
+    //
+
+    public Image viewImage() {
+        return this.img;
     }
 
     // places label where it goes over image
-    public void updateUI(int x, int y, double distance) {
-        JLabel label1 = new JLabel(distance + " m");
-        label1.setHorizontalTextPosition(x);
-        label1.setVerticalTextPosition(y);
-        this.layeredPane.add(label1);
+    public void updateUI(int x, int y, double distance, Image img) {
+        Graphics g = img.getGraphics();
+        g.setColor(Color.PINK);
+        g.drawString(distance + " m", x, y);
     }
 
 }

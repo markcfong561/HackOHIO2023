@@ -1,13 +1,18 @@
-import java.util.Map; 
-import java.util.HashMap; 
-import java.util.Pair;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
 
 public final class ModelHack2023 {
 
-    private final Map<Pair<Integer, Integer>, Double> people;
+    private Map<List<Integer>, Double> people;
 
     public ModelHack2023() {
-        Map<Pair<Integer, Integer>, Double> people =  new HashMap<Pair<Integer, Integer>, Double>();
+
+        this.people = new HashMap<List<Integer>, Double>();
+    }
+
+    public Map<List<Integer>, Double> people() {
+        return this.people;
     }
 
 }
